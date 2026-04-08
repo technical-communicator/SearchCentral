@@ -1,0 +1,80 @@
+.submit-page {
+  padding: 48px 0 80px;
+}
+
+.submit-intro {
+  margin-bottom: 40px;
+}
+
+.submit-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 32px;
+  align-items: start;
+}
+
+.submit-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-error {
+  color: #d32f2f;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  background: #fdecea;
+  border-radius: 8px;
+}
+
+.submit-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.sidebar-card ul {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.sidebar-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.submit-success {
+  max-width: 480px;
+  margin: 60px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.success-icon { font-size: 3rem; }
+.submit-success h2 { font-size: 1.6rem; font-weight: 700; }
+.submit-success p { color: var(--muted); }
+
+@media (max-width: 768px) {
+  .submit-layout { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
