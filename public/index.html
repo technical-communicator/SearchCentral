@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Central Florida</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🌴</text></svg>" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">Search Central <span>Florida</span></a>
+      <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+      <nav class="nav-links" id="nav-links">
+        <a href="#events">Events</a>
+        <a href="#instagram">Photos</a>
+        <a href="#blog">Blog</a>
+        <a href="#submit">Submit Event</a>
+        <a href="https://patreon.com/SearchCentralFlorida?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink"
+           target="_blank" rel="noopener" class="nav-cta">Join Mail Club</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1>Discover Central Florida's<br><span>Best Local Events</span></h1>
+        <p>Your guide to what's happening in the heart of the Sunshine State — art shows, food festivals, film nights, and more.</p>
+        <div class="hero-btns">
+          <a href="#events" class="btn btn-primary">View Events</a>
+          <a href="https://www.instagram.com/searchcentralfl/" target="_blank" rel="noopener" class="btn btn-outline">@searchcentralfl</a>
+        </div>
+      </div>
+      <div class="hero-badge">🌴<br>Central Florida's<br>Event Hub</div>
+    </div>
+  </section>
+
+  <!-- MAIL CLUB -->
+  <section class="mailclub">
+    <div class="container mailclub-inner">
+      <div>
+        <h2>Join the Mail Club</h2>
+        <p>Exclusive event picks, behind-the-scenes content, and more — via Patreon.</p>
+      </div>
+      <a href="https://patreon.com/SearchCentralFlorida?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink"
+         target="_blank" rel="noopener" class="btn btn-white">Join on Patreon →</a>
+    </div>
+  </section>
+
+  <!-- EVENTS CALENDAR -->
+  <section class="section" id="events">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Events Calendar</h2>
+          <p class="section-sub">Upcoming events across Central Florida</p>
+        </div>
+        <a href="#submit" class="btn btn-primary">+ Submit Event</a>
+      </div>
+
+      <div class="cal-nav">
+        <button class="cal-btn" id="cal-prev">&#8249;</button>
+        <span class="cal-label" id="cal-label"></span>
+        <button class="cal-btn" id="cal-next">&#8250;</button>
+      </div>
+
+      <div class="cal-grid" id="cal-grid"></div>
+
+      <div id="events-list" class="events-list"></div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="section section-sand" id="instagram">
+    <div class="container">
+      <h2 class="section-title">From Our Instagram</h2>
+      <p class="section-sub">
+        Follow <a href="https://www.instagram.com/searchcentralfl/" target="_blank" rel="noopener">@searchcentralfl</a> for daily Central Florida content.
+      </p>
+
+      <div class="ig-category">
+        <span class="tag tag-events">Events Calendar</span>
+        <div class="ig-grid">
+          <div class="ig-wrap">
+            <blockquote class="instagram-media" data-instgrm-captioned
+              data-instgrm-permalink="https://www.instagram.com/p/DWzD7jkFcsL/?utm_source=ig_embed&utm_campaign=loading"
+              data-instgrm-version="14"></blockquote>
+          </div>
+        </div>
+      </div>
+
+      <div class="ig-category" style="margin-top:40px;">
+        <span class="tag tag-film">Film Photos</span>
+        <div class="ig-grid">
+          <div class="ig-wrap">
+            <blockquote class="instagram-media" data-instgrm-captioned
+              data-instgrm-permalink="https://www.instagram.com/p/DWoowNYjZB0/?utm_source=ig_embed&utm_campaign=loading"
+              data-instgrm-version="14"></blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script async src="//www.instagram.com/embed.js"></script>
+
+  <!-- BLOG -->
+  <section class="section" id="blog">
+    <div class="container">
+      <h2 class="section-title">Blog</h2>
+      <p class="section-sub">Stories, guides, and highlights from the Central Florida scene.</p>
+      <div id="blog-grid" class="blog-grid"></div>
+    </div>
+  </section>
+
+  <!-- SUBMIT EVENT -->
+  <section class="section section-sand" id="submit">
+    <div class="container">
+      <div class="submit-layout">
+        <div class="submit-form-wrap">
+          <h2 class="section-title">Submit Your Event</h2>
+          <p class="section-sub">Share your event with the Central Florida community — it's free.</p>
+
+          <form class="submit-form" id="event-form">
+            <div class="form-group">
+              <label>Event Name <span class="req">*</span></label>
+              <input type="text" name="title" placeholder="e.g. Downtown Orlando Art Walk" required maxlength="150" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Date <span class="req">*</span></label>
+                <input type="date" name="date" required />
+              </div>
+              <div class="form-group">
+                <label>Time</label>
+                <input type="time" name="time" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Location <span class="req">*</span></label>
+              <input type="text" name="location" placeholder="e.g. Lake Eola Park, Orlando FL" required maxlength="200" />
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea name="description" rows="4" placeholder="Tell us about your event..." maxlength="800"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Event Link</label>
+              <input type="url" name="link" placeholder="https://eventbrite.com/..." />
+            </div>
+            <div class="form-group">
+              <label>Your Email</label>
+              <input type="email" name="contact_email" placeholder="your@email.com" />
+            </div>
+            <div id="form-status"></div>
+            <button type="submit" class="btn btn-primary" id="form-submit">Submit Event</button>
+          </form>
+        </div>
+
+        <aside class="submit-sidebar">
+          <div class="sidebar-card">
+            <h3>Guidelines</h3>
+            <ul>
+              <li>Events must be in Central Florida</li>
+              <li>Free and paid events welcome</li>
+              <li>Events appear on the calendar immediately</li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <h3>Want more exposure?</h3>
+            <p>For featured listings and social media promotion, reach out on Instagram.</p>
+            <a href="https://www.instagram.com/searchcentralfl/" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:12px;display:inline-flex;">@searchcentralfl</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-logo">Search Central <span>Florida</span></span>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/searchcentralfl/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://patreon.com/SearchCentralFlorida" target="_blank" rel="noopener">Patreon</a>
+      </div>
+      <p class="footer-copy">&copy; <span id="year"></span> Search Central Florida</p>
+    </div>
+  </footer>
+
+  <div class="event-modal-backdrop" id="modal-backdrop">
+    <div class="event-modal" id="event-modal">
+      <button class="modal-close" id="modal-close">&#10005;</button>
+      <h2 id="modal-title"></h2>
+      <p id="modal-meta" class="modal-meta"></p>
+      <p id="modal-desc" class="modal-desc"></p>
+      <a id="modal-link" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:16px;display:none;">More Info →</a>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

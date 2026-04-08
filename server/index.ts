@@ -4,35 +4,33 @@ import path from 'path'
 import dotenv from 'dotenv'
 import eventsRouter from './routes/events'
 import postsRouter from './routes/posts'
-import instagramRouter from './routes/instagram'
 
 dotenv.config()
 
-const app = express()
+const app  = express()
 const PORT = process.env.PORT || 3001
 
 app.use(cors())
 app.use(express.json())
 
+// API routes
 app.use('/api/events', eventsRouter)
-app.use('/api/posts', postsRouter)
-app.use('/api/instagram', instagramRouter)
+app.use('/api/posts',  postsRouter)
 
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() })
+app.get('/api/health', (_req, res) => res.json({ status: 'ok' }))
+
+// Serve static frontend
+const pub = path.join(process.cwd(), 'public')
+app.use(express.static(pub))
+
+// Blog post pages → blog.html
+app.get('/blog/:slug', (_req, res) => {
+  res.sendFile(path.join(pub, 'blog.html'))
 })
 
-// Serve built frontend in production
-if (process.env.NODE_ENV === 'production') {
-  const clientDist = path.join(process.cwd(), 'dist', 'client')
-  app.use(express.static(clientDist))
-  app.get('*', (_req, res) => {
-    res.sendFile(path.join(clientDist, 'index.html'))
-  })
-}
+// Fallback
+app.get('*', (_req, res) => res.sendFile(path.join(pub, 'index.html')))
 
 app.listen(PORT, () => {
-  console.log(`Search Central Florida API running on http://localhost:${PORT}`)
+  console.log(`\n  Search Central Florida running at http://localhost:${PORT}\n`)
 })
-
-export default app

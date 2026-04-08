@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Search Central Florida</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">Search Central <span>Florida</span></a>
+      <button class="burger" id="burger">&#9776;</button>
+      <nav class="nav-links" id="nav-links">
+        <a href="/#events">Events</a>
+        <a href="/#instagram">Photos</a>
+        <a href="/#blog">Blog</a>
+        <a href="/#submit">Submit Event</a>
+        <a href="https://patreon.com/SearchCentralFlorida" target="_blank" rel="noopener" class="nav-cta">Join Mail Club</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container" style="max-width:720px;">
+      <a href="/" class="back-link">← Back</a>
+      <div id="post-content"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-logo">Search Central <span>Florida</span></span>
+      <p class="footer-copy">&copy; <span id="year"></span> Search Central Florida</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear()
+    document.getElementById('burger').addEventListener('click', () => {
+      document.getElementById('nav-links').classList.toggle('open')
+    })
+
+    const slug = location.pathname.replace('/blog/', '').replace(/\/$/, '')
+
+    fetch(`/api/posts/${slug}`)
+      .then(r => { if (!r.ok) throw new Error('Not found'); return r.json() })
+      .then(post => {
+        document.title = `${post.title} — Search Central Florida`
+        document.getElementById('post-content').innerHTML = `
+          <p style="font-size:.8rem;color:var(--faint);margin:24px 0 10px;">
+            ${new Date(post.created_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}
+          </p>
+          <h1 style="font-size:2rem;font-weight:800;line-height:1.25;margin-bottom:${post.excerpt ? '14px' : '32px'}">${post.title}</h1>
+          ${post.excerpt ? `<p style="font-size:1.05rem;color:var(--muted);margin-bottom:32px;line-height:1.7;">${post.excerpt}</p>` : ''}
+          <hr style="border:none;border-top:1px solid var(--border);margin-bottom:32px;">
+          <div class="post-body">${mdToHtml(post.body)}</div>`
+      })
+      .catch(() => {
+        document.getElementById('post-content').innerHTML = `
+          <h2 style="margin-top:40px;">Post not found</h2>
+          <a href="/" class="btn btn-outline" style="margin-top:16px;display:inline-flex;">← Home</a>`
+      })
+
+    function mdToHtml(md) {
+      return md
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^## (.+)$/gm,  '<h2>$1</h2>')
+        .replace(/^# (.+)$/gm,   '<h1>$1</h1>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g,     '<em>$1</em>')
+        .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        .split(/\n\n+/)
+        .map(b => /^<h[123]>/.test(b) ? b : `<p>${b.replace(/\n/g,'<br>')}</p>`)
+        .join('\n')
+    }
+  </script>
+  <style>
+    .back-link { display:inline-block; color:var(--muted); font-size:.9rem; font-weight:500; margin-bottom:8px; }
+    .back-link:hover { color:var(--coral); }
+    .post-body { font-size:1.05rem; line-height:1.8; }
+    .post-body h2 { font-size:1.5rem; font-weight:700; margin:28px 0 10px; }
+    .post-body h3 { font-size:1.2rem; font-weight:700; margin:24px 0 8px; }
+    .post-body p  { margin-bottom:18px; }
+    .post-body a  { color:var(--coral); text-decoration:underline; }
+    .post-body strong { font-weight:700; }
+    .post-body em     { font-style:italic; }
+  </style>
+</body>
+</html>
